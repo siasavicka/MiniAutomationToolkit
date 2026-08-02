@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="MiniAutomationToolkit.App/MiniAutomationToolkit.App.csproj" Id="2c2225d4-338e-403b-807c-d097e8ecf23b" />
+  <Project Path="MiniAutomationToolkit.Core/MiniAutomationToolkit.Core.csproj" Id="16af3ab0-85b9-4592-83de-bfb6378ff7ca" />
+</Solution>
