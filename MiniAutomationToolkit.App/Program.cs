@@ -1,7 +1,8 @@
 ﻿
-using MiniAutomationToolkit.Core.Models;
-using MiniAutomationToolkit.Core.Services;
 using MiniAutomationToolkit.Core.Helpers;
+using MiniAutomationToolkit.Core.Models;
+using MiniAutomationToolkit.Core.Pages;
+using MiniAutomationToolkit.Core.Services;
 
 //задание 2.2
 
@@ -101,3 +102,25 @@ TryCreateUser("", "alex@email.com"); //пустое имя + корректны�
 TryCreateUser("Alex", ""); //корректное имя + пустой email;                           
 TryCreateUser("Alex", "alex.email.com"); //корректное имя + email без @;
 TryCreateUser("Alexx", "alex@email.com "); //корректное имя + email с пробелом.
+
+
+// задание 3.5
+
+List<BasePage> pages = new List<BasePage>()
+{
+    new HomePage(),
+    new LoginPage()
+};
+
+foreach (BasePage page in pages)
+{
+    page.Load();
+}
+
+var urls = pages.Select(page => page.Url);// достаем все урл из коллекции
+var uniqueUrls = urls.Distinct(); //выбираем уникальные
+if (uniqueUrls.Count() == pages.Count) // и сравниваем количество между собой
+{
+    Console.WriteLine("All page URLs are unique.");
+}
+else throw new InvalidOperationException();
