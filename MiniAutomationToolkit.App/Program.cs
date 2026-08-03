@@ -73,3 +73,31 @@ void DisplayDiscount(decimal orderAmount, ClientType clientType)
     var discount = DiscountCalculator.CalculateDiscount(orderAmount, clientType);
     Console.WriteLine($"Client: {clientType}, amount: {orderAmount}, discount: {discount:0.##}");
 }
+
+// задание 3.4
+
+UserDto userDto1 = new UserDto("Alex Smith", "alex@example.com"); // успешное создание пользователя 
+Console.WriteLine($"{userDto1}");
+
+UserDto userDto2 = new UserDto("Alex Smith", "alex@example.com"); // равенство двух объектов с одинаковыми значениями
+var result = userDto2.Equals(userDto1);
+Console.WriteLine($"Users are equal - {result}");
+
+// userDto1.Name = "alex smith"; - невозможность изменить свойства уже созданного объекта.
+
+void TryCreateUser(string name, string email) // метод для шибочных сценариев, которые не должны завершать работу приложения
+{
+    try
+    {
+        new UserDto(name, email);
+    }
+    catch (ArgumentException ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+}
+
+TryCreateUser("", "alex@email.com"); //пустое имя + корректный email;
+TryCreateUser("Alex", ""); //корректное имя + пустой email;                           
+TryCreateUser("Alex", "alex.email.com"); //корректное имя + email без @;
+TryCreateUser("Alexx", "alex@email.com "); //корректное имя + email с пробелом.
