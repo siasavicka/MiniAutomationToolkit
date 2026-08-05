@@ -1,4 +1,5 @@
 ﻿
+using MiniAutomationToolkit.Core.Configuration;
 using MiniAutomationToolkit.Core.Helpers;
 using MiniAutomationToolkit.Core.Models;
 using MiniAutomationToolkit.Core.Pages;
@@ -64,7 +65,6 @@ try
 catch (FileNotFoundException ex)
 {
     Console.WriteLine(ex.Message);
-
 }
 
 
@@ -81,8 +81,8 @@ UserDto userDto1 = new UserDto("Alex Smith", "alex@example.com"); // успеш�
 Console.WriteLine($"{userDto1}");
 
 UserDto userDto2 = new UserDto("Alex Smith", "alex@example.com"); // равенство двух объектов с одинаковыми значениями
-var result = userDto2.Equals(userDto1);
-Console.WriteLine($"Users are equal - {result}");
+var result2 = userDto2.Equals(userDto1);
+Console.WriteLine($"Users are equal - {result2}");
 
 // userDto1.Name = "alex smith"; - невозможность изменить свойства уже созданного объекта.
 
@@ -124,3 +124,45 @@ if (uniqueUrls.Count() == pages.Count) // и сравниваем количес
     Console.WriteLine("All page URLs are unique.");
 }
 else throw new InvalidOperationException();
+
+
+// задание 4.6
+
+var filePath = @"MiniAutomationToolkit.App\data\appsettings.txt";
+AppConfig appConfig = new AppConfig(filePath);
+
+
+var resultUrl = appConfig.GetSetting<string>("baseUrl"); // проверки по заданию
+Console.WriteLine($"{resultUrl}");
+
+
+var resultTimeout = appConfig.GetSetting<int>("timeout");
+Console.WriteLine($"{resultTimeout}");
+
+
+var resultRetryCount = appConfig.GetSetting<int>("retryCount");
+Console.WriteLine($"{resultRetryCount}");
+
+
+var resultHeadless = appConfig.GetSetting<bool>("headless");
+Console.WriteLine($"{resultHeadless}");
+
+try
+{
+    var resultWrongKey = appConfig.GetSetting<bool>("run");
+    Console.WriteLine($"{resultWrongKey}");
+}
+catch (KeyNotFoundException ex)
+{
+    Console.WriteLine(ex.Message);
+}
+
+try
+{
+    var resultWrongType = appConfig.GetSetting<int>("headless");
+    Console.WriteLine($"{resultWrongType}");
+}
+catch (InvalidDataException ex)
+{
+    Console.WriteLine(ex.Message);
+}
