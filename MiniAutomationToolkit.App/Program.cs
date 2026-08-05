@@ -1,5 +1,6 @@
 ﻿
 using MiniAutomationToolkit.Core.Configuration;
+using MiniAutomationToolkit.Core.Extensions;
 using MiniAutomationToolkit.Core.Helpers;
 using MiniAutomationToolkit.Core.Models;
 using MiniAutomationToolkit.Core.Pages;
@@ -165,4 +166,24 @@ try
 catch (InvalidDataException ex)
 {
     Console.WriteLine(ex.Message);
+}
+
+
+// задание 4.7
+
+var webs = new List<string?>()
+{
+"https://google.com",      //→ true
+"http://example.org",      //→ true
+"ftp://files.example.com", //→ false
+ null,                     //→ false
+"HTTPS://SITE.EXAMPLE.COM" //→ true
+};
+
+foreach (var web in webs)
+{
+    var result = web.HasHttpScheme();
+    Console.WriteLine($"{web} -> {result}");
+
+
 }
