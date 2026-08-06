@@ -197,3 +197,16 @@ var resultStopwatch = Stopwatch.StartNew(); // запускаем секундо
 var resultLongOperationAsync = await longOperationSimulator.LongOperationAsync();
 resultStopwatch.Stop();
 Console.WriteLine($"{resultLongOperationAsync}; {resultStopwatch.ElapsedMilliseconds} milliseconds");
+
+
+// задание 5.9
+
+ErrorLogger errorLogger = new ErrorLogger();
+
+var inputText = errorLogger.TryReadFile(@"MiniAutomationToolkit.App/data/input.txt", @"MiniAutomationToolkit.App/data/errors.log");
+Console.WriteLine(inputText);
+
+var missingText = errorLogger.TryReadFile(@"MiniAutomationToolkit.App/data/missing.txt", @"MiniAutomationToolkit.App/data/errors.log");
+var missingLog = File.ReadAllText(@"MiniAutomationToolkit.App/data/errors.log");
+Console.WriteLine(missingLog);
+
