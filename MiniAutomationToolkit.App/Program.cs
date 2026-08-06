@@ -5,6 +5,8 @@ using MiniAutomationToolkit.Core.Helpers;
 using MiniAutomationToolkit.Core.Models;
 using MiniAutomationToolkit.Core.Pages;
 using MiniAutomationToolkit.Core.Services;
+using MiniAutomationToolkit.Core.Simulations;
+using System.Diagnostics;
 
 //задание 2.2
 
@@ -184,6 +186,14 @@ foreach (var web in webs)
 {
     var result = web.HasHttpScheme();
     Console.WriteLine($"{web} -> {result}");
-
-
 }
+
+
+// задание 5.8
+
+LongOperationSimulator longOperationSimulator = new LongOperationSimulator(); // создаем экземпляр класса
+
+var resultStopwatch = Stopwatch.StartNew(); // запускаем секундомер
+var resultLongOperationAsync = await longOperationSimulator.LongOperationAsync();
+resultStopwatch.Stop();
+Console.WriteLine($"{resultLongOperationAsync}; {resultStopwatch.ElapsedMilliseconds} milliseconds");
